@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class FAlignmentStack extends StatelessWidget {
+class FAlignStack extends StatelessWidget {
   final List<Widget> list = [];
 
-  FAlignmentStack({
+  FAlignStack({
     Widget topLeft,
     Widget topCenter,
     Widget topRight,
@@ -33,9 +33,9 @@ class FAlignmentStack extends StatelessWidget {
     }
     assert(alignment != null);
     list.add(new SizedBox(
-      child: new Stack(
+      child: new Align(
+        child: child,
         alignment: alignment,
-        children: <Widget>[child],
       ),
       width: double.infinity,
       height: double.infinity,
