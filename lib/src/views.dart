@@ -3,60 +3,43 @@ import 'package:flutter/material.dart';
 class FAlignmentStack extends StatelessWidget {
   final List<Widget> list = [];
 
-  final List<Widget> childrenTopLeft;
-  final List<Widget> childrenTopCenter;
-  final List<Widget> childrenTopRight;
-
-  final List<Widget> childrenCenterLeft;
-  final List<Widget> childrenCenter;
-  final List<Widget> childrenCenterRight;
-
-  final List<Widget> childrenBottomLeft;
-  final List<Widget> childrenBottomCenter;
-  final List<Widget> childrenBottomRight;
-
   FAlignmentStack({
-    this.childrenTopLeft,
-    this.childrenTopCenter,
-    this.childrenTopRight,
-    this.childrenCenterLeft,
-    this.childrenCenter,
-    this.childrenCenterRight,
-    this.childrenBottomLeft,
-    this.childrenBottomCenter,
-    this.childrenBottomRight,
+    Widget topLeft,
+    Widget topCenter,
+    Widget topRight,
+    Widget centerLeft,
+    Widget center,
+    Widget centerRight,
+    Widget bottomLeft,
+    Widget bottomCenter,
+    Widget bottomRight,
   }) {
-    _addToListIfNeed(list, childrenTopLeft, Alignment.topLeft);
-    _addToListIfNeed(list, childrenTopCenter, Alignment.topCenter);
-    _addToListIfNeed(list, childrenTopRight, Alignment.topRight);
+    _addToList(topLeft, Alignment.topLeft);
+    _addToList(topCenter, Alignment.topCenter);
+    _addToList(topRight, Alignment.topRight);
 
-    _addToListIfNeed(list, childrenCenterLeft, Alignment.centerLeft);
-    _addToListIfNeed(list, childrenCenter, Alignment.center);
-    _addToListIfNeed(list, childrenCenterRight, Alignment.centerRight);
+    _addToList(centerLeft, Alignment.centerLeft);
+    _addToList(center, Alignment.center);
+    _addToList(centerRight, Alignment.centerRight);
 
-    _addToListIfNeed(list, childrenBottomLeft, Alignment.bottomLeft);
-    _addToListIfNeed(list, childrenBottomCenter, Alignment.bottomCenter);
-    _addToListIfNeed(list, childrenBottomRight, Alignment.bottomRight);
+    _addToList(bottomLeft, Alignment.bottomLeft);
+    _addToList(bottomCenter, Alignment.bottomCenter);
+    _addToList(bottomRight, Alignment.bottomRight);
   }
 
-  static void _addToListIfNeed(
-    List<Widget> list,
-    List<Widget> children,
-    AlignmentGeometry alignment,
-  ) {
-    assert(list != null);
-    assert(alignment != null);
-
-    if (children != null && children.isNotEmpty) {
-      list.add(new SizedBox(
-        child: new Stack(
-          alignment: alignment,
-          children: children,
-        ),
-        width: double.infinity,
-        height: double.infinity,
-      ));
+  void _addToList(Widget child, AlignmentGeometry alignment) {
+    if (child == null) {
+      return;
     }
+    assert(alignment != null);
+    list.add(new SizedBox(
+      child: new Stack(
+        alignment: alignment,
+        children: <Widget>[child],
+      ),
+      width: double.infinity,
+      height: double.infinity,
+    ));
   }
 
   @override
